@@ -36,9 +36,11 @@ public class GameCamera : MonoBehaviour
 
 	float menuToGameViewTransitionT;
 
+	PlayerAction playerActions;
 
 	void Start()
 	{
+		playerActions = RebindManager.Instance.activePlayerActions;
 		InitView();
 	}
 
@@ -129,14 +131,9 @@ public class GameCamera : MonoBehaviour
 		transform.LookAt(target.position, target.forward);
 		transform.RotateAround(transform.position, gravityUp, -player.totalTurnAngle + angle + startAngle);
 
-		if (Input.GetKey(KeyBindings.TopDownCamTurnLeft))
-		{
-			angle -= turnSpeed * Time.smoothDeltaTime;
-		}
-		if (Input.GetKey(KeyBindings.TopDownCamTurnRight))
-		{
-			angle += turnSpeed * Time.smoothDeltaTime;
-		}
+		// Turn Camera
+		float turnInput = playerActions.CameraControls.TurnCamera.ReadValue<float>();
+		angle += turnInput * turnSpeed * Time.smoothDeltaTime;
 	}
 
 	void UpdateAlternateView(ViewSettings view)

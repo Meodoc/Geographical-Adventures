@@ -313,6 +313,15 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Turn Camera"",
+                    ""type"": ""Value"",
+                    ""id"": ""3807207f-2282-4959-92b6-4f277ca8acb7"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -392,6 +401,72 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""action"": ""Forward Camera View"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""LR"",
+                    ""id"": ""8334eca4-413b-440b-b1a0-0c8e018ef9d0"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn Camera"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c243f01a-6bd2-4b9c-966d-0f937b5ed9a8"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Turn Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9e605daa-6c5d-41ce-b6cd-5170eb66196b"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Turn Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""5240fe56-df1b-4d7e-b43f-0f8eaf53ab4d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn Camera"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""5067f652-9934-431c-b68c-3369bdd70723"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Turn Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""c8fb878c-b66d-4d40-a52f-1bf7bd0e8ae8"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Turn Camera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -629,6 +704,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         m_CameraControls_ForwardCameraView = m_CameraControls.FindAction("Forward Camera View", throwIfNotFound: true);
         m_CameraControls_BackwardCameraView = m_CameraControls.FindAction("Backward Camera View", throwIfNotFound: true);
         m_CameraControls_TopCameraView = m_CameraControls.FindAction("Top Camera View", throwIfNotFound: true);
+        m_CameraControls_TurnCamera = m_CameraControls.FindAction("Turn Camera", throwIfNotFound: true);
         // UI Controls
         m_UIControls = asset.FindActionMap("UI Controls", throwIfNotFound: true);
         m_UIControls_TogglePause = m_UIControls.FindAction("Toggle Pause", throwIfNotFound: true);
@@ -772,6 +848,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     private readonly InputAction m_CameraControls_ForwardCameraView;
     private readonly InputAction m_CameraControls_BackwardCameraView;
     private readonly InputAction m_CameraControls_TopCameraView;
+    private readonly InputAction m_CameraControls_TurnCamera;
     public struct CameraControlsActions
     {
         private @PlayerAction m_Wrapper;
@@ -779,6 +856,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         public InputAction @ForwardCameraView => m_Wrapper.m_CameraControls_ForwardCameraView;
         public InputAction @BackwardCameraView => m_Wrapper.m_CameraControls_BackwardCameraView;
         public InputAction @TopCameraView => m_Wrapper.m_CameraControls_TopCameraView;
+        public InputAction @TurnCamera => m_Wrapper.m_CameraControls_TurnCamera;
         public InputActionMap Get() { return m_Wrapper.m_CameraControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -797,6 +875,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @TopCameraView.started -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnTopCameraView;
                 @TopCameraView.performed -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnTopCameraView;
                 @TopCameraView.canceled -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnTopCameraView;
+                @TurnCamera.started -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnTurnCamera;
+                @TurnCamera.performed -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnTurnCamera;
+                @TurnCamera.canceled -= m_Wrapper.m_CameraControlsActionsCallbackInterface.OnTurnCamera;
             }
             m_Wrapper.m_CameraControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -810,6 +891,9 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                 @TopCameraView.started += instance.OnTopCameraView;
                 @TopCameraView.performed += instance.OnTopCameraView;
                 @TopCameraView.canceled += instance.OnTopCameraView;
+                @TurnCamera.started += instance.OnTurnCamera;
+                @TurnCamera.performed += instance.OnTurnCamera;
+                @TurnCamera.canceled += instance.OnTurnCamera;
             }
         }
     }
@@ -928,6 +1012,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         void OnForwardCameraView(InputAction.CallbackContext context);
         void OnBackwardCameraView(InputAction.CallbackContext context);
         void OnTopCameraView(InputAction.CallbackContext context);
+        void OnTurnCamera(InputAction.CallbackContext context);
     }
     public interface IUIControlsActions
     {
