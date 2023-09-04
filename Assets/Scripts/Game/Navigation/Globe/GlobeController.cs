@@ -20,9 +20,11 @@ public class GlobeController : MonoBehaviour
 	public float cursorHighlightRadius;
 
 	[Header("References")]
+	public PlayerInputHandler PlayerInputHandler;
 	public Transform globe;
 	public GlobeMapLoader mapLoader;
 	public UnityEngine.UI.CanvasScaler canvasScaler;
+	public RectTransform gamepadMapSelector;
 
 	// Private stuff
 	float angleX;
@@ -44,11 +46,16 @@ public class GlobeController : MonoBehaviour
 	float targetZoom;
 	float smoothZoomV;
 
+	Vector2 gamepadMapSelectorPosUI;
+	Vector2 gamepadMapSelectorPosWorld;
+
 	PlayerAction playerActions;
 
 	void Awake()
 	{
 		playerActions = new PlayerAction();
+		gamepadMapSelectorPosUI = gamepadMapSelector.rect.center;
+		gamepadMapSelectorPosWorld = gamepadMapSelector.TransformPoint(gamepadMapSelectorPosUI);
 	}
 
 	void Start()
@@ -88,11 +95,12 @@ public class GlobeController : MonoBehaviour
 		if (GameController.IsState(GameState.ViewingMap))
 		{
 			HandleInput();
-			Vector2 mousePos = Input.mousePosition;
 
-			if (!Input.GetMouseButton(0))
-			{
-				HandleSelection();
+			if (PlayerInputHandler.InKeyboardMouseState && !Input.GetMouseButton(0)) {
+				Vector2 mousePos = Input.mousePosition;
+				HandleSelection(mousePos);
+			} else if (PlayerInputHandler.InGamepadState) {
+				HandleSelection(gamepadMapSelectorPosWorld);
 			}
 			UpdateRotation();
 
@@ -143,9 +151,9 @@ public class GlobeController : MonoBehaviour
 		cam.transform.LookAt(Vector3.zero);
 	}
 
-	void HandleSelection()
+	void HandleSelection(Vector2 pos)
 	{
-		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+		Ray ray = cam.ScreenPointToRay(pos);
 		GameObject selection = Raycast(ray, globeMask);
 		overrideTextDisplay = false;
 
@@ -181,6 +189,12 @@ public class GlobeController : MonoBehaviour
 		float x = (screenPos.x / Screen.width - 0.5f) * canvasScaler.referenceResolution.x;
 		float y = (screenPos.y / Screen.height - 0.5f) * canvasScaler.referenceResolution.y;
 		return new Vector2(x, y);
+	}
+
+	Vector2 OffsetGamepadMapSelectorPos(Vector2 pos, float offset = 10.0f) 
+	{
+		pos.y += offset;
+		return pos;
 	}
 
 	GameObject Raycast(Ray ray, LayerMask mask)
@@ -240,7 +254,11 @@ public class GlobeController : MonoBehaviour
 			countryHighlightStates[i] = Mathf.Clamp01(countryHighlightStates[i] - Time.unscaledDeltaTime * fadeSpeed);
 		}
 
-		countryNameDisplay.rectTransform.localPosition = GetUIPos(Input.mousePosition);
+		Vector2 transformPos = PlayerInputHandler.InKeyboardMouseState ?
+			GetUIPos(Input.mousePosition) :
+			OffsetGamepadMapSelectorPos(gamepadMapSelectorPosUI);
+
+		countryNameDisplay.rectTransform.localPosition = transformPos;
 		countryNameDisplay.color = new Color(1, 1, 1, Mathf.InverseLerp(0.5f, 1, mostHighlightedValue));
 		countryNameDisplay.text = countryNames[mostHighlightedIndex];
 
