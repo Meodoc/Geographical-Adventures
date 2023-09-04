@@ -9,9 +9,30 @@ public class PlayerInputHandler : MonoBehaviour
 	public Player player;
 	public GeoGame.Quest.QuestSystem questSystem;
 	public GameCamera gameCamera;
-	public UIManager uIManager;
+	public UIManager uiManager;
 	public SolarSystem.SolarSystemManager solarSystemManager;
+	public PlayerInput playerInput;
 	PlayerAction playerActions;
+
+    string currentControlScheme;
+
+    public bool InKeyboardMouseState
+    {
+        get { return currentControlScheme == "Keyboard-Mouse"; }
+    }
+
+    public bool InGamepadState
+    {
+        get { return currentControlScheme == "Gamepad"; }
+    }
+
+
+	public void OnControlSchemeChanged() 
+	{
+        currentControlScheme = playerInput.currentControlScheme;
+
+        UIDisplay();
+    }
 
 
 	void Start()
@@ -82,13 +103,17 @@ public class PlayerInputHandler : MonoBehaviour
 	{
 		if (playerActions.UIControls.TogglePause.WasPressedThisFrame())
 		{
-			uIManager.TogglePause();
+			uiManager.TogglePause();
 		}
 
 		if (playerActions.UIControls.ToggleMap.WasPressedThisFrame())
 		{
-			uIManager.ToggleMap();
+			uiManager.ToggleMap();
 		}
 	}
 
+	void UIDisplay()
+    {
+        uiManager.ToggleGamepadMapSelector();
+    }
 }

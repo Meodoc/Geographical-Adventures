@@ -13,8 +13,10 @@ public class UIManager : MonoBehaviour
 	public GameObject[] hideInMapView;
 	public MapMenu map;
 	public Compass compass;
+	public GameObject gamepadMapSelector;
 	public CanvasGroup hudGroup;
 	public Toggle invertInputToggle;
+	public PlayerInputHandler playerInputHandler;
 
 	public float smoothT;
 	float smoothV;
@@ -57,12 +59,23 @@ public class UIManager : MonoBehaviour
 		if (showMap)
 		{
 			GameController.SetState(GameState.ViewingMap);
+			gamepadMapSelector.SetActive(playerInputHandler.InGamepadState);
 		}
 		else
 		{
 			GameController.SetState(GameState.Playing);
+			gamepadMapSelector.SetActive(false);
 		}
 
 		Seb.Helpers.GameObjectHelper.SetActiveAll(!showMap, hideInMapView);
+	}
+
+
+	public void ToggleGamepadMapSelector()
+	{
+		if (GameController.IsState(GameState.ViewingMap))
+		{
+			gamepadMapSelector.SetActive(playerInputHandler.InGamepadState);
+		}
 	}
 }

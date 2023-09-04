@@ -89,7 +89,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Drop Package"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -133,7 +133,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -144,7 +144,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -155,7 +155,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -166,7 +166,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -188,7 +188,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Speed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -199,7 +199,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Speed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -243,7 +243,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -265,7 +265,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/backspace"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Make Daytime"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -276,7 +276,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Make Nighttime"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -331,7 +331,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Top Camera View"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -364,7 +364,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Backward Camera View"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -386,7 +386,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Forward Camera View"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -500,7 +500,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Toggle Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -511,7 +511,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Toggle Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -533,7 +533,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/m"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Toggle Map"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -581,7 +581,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
                     ""processors"": ""Normalize(min=-120,max=120)"",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Map Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -636,7 +636,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/press"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -647,7 +647,7 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard-Mouse"",
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -668,11 +668,16 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Keyboard"",
-            ""bindingGroup"": ""Keyboard"",
+            ""name"": ""Keyboard-Mouse"",
+            ""bindingGroup"": ""Keyboard-Mouse"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -980,13 +985,13 @@ public partial class @PlayerAction : IInputActionCollection2, IDisposable
         }
     }
     public MapControlsActions @MapControls => new MapControlsActions(this);
-    private int m_KeyboardSchemeIndex = -1;
-    public InputControlScheme KeyboardScheme
+    private int m_KeyboardMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardMouseScheme
     {
         get
         {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
+            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard-Mouse");
+            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
         }
     }
     private int m_GamepadSchemeIndex = -1;
