@@ -310,7 +310,9 @@ public class SettingsMenu : Menu
 
 
 	protected override void OnMenuOpened()
-	{
+	{			
+		base.OnMenuOpened();
+
 		if (Application.isPlaying)
 		{
 			lastAppliedSettings = Settings.LoadSavedSettings();
@@ -321,6 +323,7 @@ public class SettingsMenu : Menu
 
 	protected override void OnMenuClosed()
 	{
+		base.OnMenuClosed();
 
 		if (Application.isPlaying)
 		{

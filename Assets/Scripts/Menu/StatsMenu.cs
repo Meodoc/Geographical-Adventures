@@ -44,6 +44,7 @@ public class StatsMenu : Menu
 
 	protected override void OnMenuOpened()
 	{
+		base.OnMenuOpened();
 		Refresh();
 	}
 

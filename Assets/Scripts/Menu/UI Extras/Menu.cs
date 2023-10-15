@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Menu : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Menu : MonoBehaviour
 	public GameObject menuHolder;
 	public Button closeButton;
 	public SubMenu[] subMenus;
+	public GameObject firstButton;
+	public GameObject mainMenuButton;
+	public GameObject pauseMenuButton;
 
 
 	protected virtual void Awake()
@@ -59,12 +63,24 @@ public class Menu : MonoBehaviour
 
 	protected virtual void OnMenuOpened()
 	{
+		if (firstButton)
+		{
+//			EventSystem.current.SetSelectedGameObject(null);
+			EventSystem.current.SetSelectedGameObject(firstButton);
+			Debug.Log("OnMenuOpened() called and selected gameObject set to: " + EventSystem.current.currentSelectedGameObject);
+		}
 
 	}
 
 	protected virtual void OnMenuClosed()
 	{
-
+		if (mainMenuButton && GameController.IsState(GameState.InMainMenu))
+		{
+			EventSystem.current.SetSelectedGameObject(mainMenuButton);
+		} else if (pauseMenuButton && GameController.IsState(GameState.Paused))
+		{
+			EventSystem.current.SetSelectedGameObject(pauseMenuButton);
+		}
 	}
 
 	protected virtual void OnSubMenuOpened()
@@ -74,7 +90,7 @@ public class Menu : MonoBehaviour
 
 	protected virtual void OnSubMenuClosed()
 	{
-
+		// Debug.Log("Submenu closed: " + this.gameObject.name);
 	}
 
 	public bool IsOpen

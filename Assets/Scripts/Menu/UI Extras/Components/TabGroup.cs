@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class TabGroup : MonoBehaviour
 {
 	public Tab[] tabs;
 	public int currentTabIndex;
 
-	void Start()
+	void Awake()
 	{
 		for (int i = 0; i < tabs.Length; i++)
 		{
 			int tabIndex = i;
 			tabs[i].button.onClick.AddListener(() => ShowTab(tabIndex));
 		}
-		ShowTab(currentTabIndex);
+		//ShowTab(currentTabIndex);
 	}
 
 	public void ShowTab(int tabIndex)
@@ -32,6 +33,8 @@ public class TabGroup : MonoBehaviour
 				tabs[i].button.interactable = i != tabIndex;
 			}
 		}
+		EventSystem.current?.SetSelectedGameObject(tabs[currentTabIndex].button.gameObject); 
+		Debug.Log("Button onClick() called and current selected gameObject set to: " + EventSystem.current?.currentSelectedGameObject);
 	}
 
 	[System.Serializable]
@@ -43,10 +46,9 @@ public class TabGroup : MonoBehaviour
 
 	void OnValidate()
 	{
-		if (tabs != null)
-		{
-
-			ShowTab(currentTabIndex);
-		}
+		// if (tabs != null)
+		// {
+		// 	ShowTab(currentTabIndex);
+		// }
 	}
 }

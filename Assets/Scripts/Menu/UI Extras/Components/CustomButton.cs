@@ -26,6 +26,8 @@ public class CustomButton : Button
 		if (label)
 		{
 			label.text = text;
+			// Debug.Log("Label text set: " + text + ", Actual label text: " + label.text);
+			label.ForceMeshUpdate(true);
 		}
 	}
 
@@ -33,17 +35,31 @@ public class CustomButton : Button
 	public override void OnPointerEnter(PointerEventData eventData)
 	{
 		base.OnPointerEnter(eventData);
+		EventSystem.current.SetSelectedGameObject(null);
+		EventSystem.current.SetSelectedGameObject(this.gameObject);
+		onPointerEnter?.Invoke();
+	}
+
+	public override void OnSelect(BaseEventData eventData)
+    {
+		base.OnSelect(eventData);
+        // Debug.Log(this.gameObject.name + " was selected");
 		if (changeTextOnMouseOver)
 		{
 			SetLabel($"<   {localizer.currentValue}   >");
 		}
-		onPointerEnter?.Invoke();
-	}
+    }
 
 	public override void OnPointerExit(PointerEventData eventData)
 	{
 		base.OnPointerExit(eventData);
-		SetLabel(localizer.currentValue);
+		// EventSystem.current.SetSelectedGameObject(null);
 		onPointerExit?.Invoke();
 	}
+
+	public override void OnDeselect(BaseEventData eventData)
+    {
+		base.OnDeselect(eventData);
+		SetLabel(localizer.currentValue);
+    }
 }
