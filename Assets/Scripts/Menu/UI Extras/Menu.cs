@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Menu : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Menu : MonoBehaviour
 	public GameObject menuHolder;
 	public Button closeButton;
 	public SubMenu[] subMenus;
+	
+	public GameObject buttonFirstSelected, mainMenuButtonFirstSelected, pauseMenuFirstButtonSelected;
 
 
 	protected virtual void Awake()
@@ -59,12 +62,14 @@ public class Menu : MonoBehaviour
 
 	protected virtual void OnMenuOpened()
 	{
-
+		SetSelectedGameObject(buttonFirstSelected);
 	}
 
 	protected virtual void OnMenuClosed()
 	{
-
+		SetSelectedGameObject(GameController.IsState(GameState.Paused)
+			? pauseMenuFirstButtonSelected
+			: mainMenuButtonFirstSelected);
 	}
 
 	protected virtual void OnSubMenuOpened()
@@ -75,6 +80,12 @@ public class Menu : MonoBehaviour
 	protected virtual void OnSubMenuClosed()
 	{
 
+	}
+
+	protected void SetSelectedGameObject(GameObject go)
+	{
+		EventSystem.current.SetSelectedGameObject(null);
+		EventSystem.current.SetSelectedGameObject(go);
 	}
 
 	public bool IsOpen

@@ -311,6 +311,8 @@ public class SettingsMenu : Menu
 
 	protected override void OnMenuOpened()
 	{
+		SetSelectedGameObject(buttonFirstSelected);
+		
 		if (Application.isPlaying)
 		{
 			lastAppliedSettings = Settings.LoadSavedSettings();
@@ -321,7 +323,10 @@ public class SettingsMenu : Menu
 
 	protected override void OnMenuClosed()
 	{
-
+		SetSelectedGameObject(GameController.IsState(GameState.Paused)
+			? pauseMenuFirstButtonSelected
+			: mainMenuButtonFirstSelected);
+		
 		if (Application.isPlaying)
 		{
 			//RebindManager.Instance.close();

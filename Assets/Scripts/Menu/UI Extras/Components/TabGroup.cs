@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class TabGroup : MonoBehaviour
 {
@@ -31,6 +32,12 @@ public class TabGroup : MonoBehaviour
 			{
 				tabs[i].button.interactable = i != tabIndex;
 			}
+		}
+
+		if (EventSystem.current != null)
+		{
+			EventSystem.current.SetSelectedGameObject(null);
+			EventSystem.current.SetSelectedGameObject(tabs[currentTabIndex].button.gameObject);
 		}
 	}
 

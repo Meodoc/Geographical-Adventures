@@ -21,7 +21,7 @@ public class CustomButton : Button
 	public TMPro.TMP_Text label;
 
 
-	void SetLabel(string text)
+	private void SetLabel(string text)
 	{
 		if (label)
 		{
@@ -29,21 +29,37 @@ public class CustomButton : Button
 		}
 	}
 
-
 	public override void OnPointerEnter(PointerEventData eventData)
 	{
 		base.OnPointerEnter(eventData);
-		if (changeTextOnMouseOver)
-		{
-			SetLabel($"<   {localizer.currentValue}   >");
-		}
+		EventSystem.current.SetSelectedGameObject(null);
+		EventSystem.current.SetSelectedGameObject(this.gameObject);
 		onPointerEnter?.Invoke();
 	}
 
+	public override void OnSelect(BaseEventData eventData)
+    {
+		base.OnSelect(eventData);
+		
+		// Use a coroutine to update the label after the UI update
+		StartCoroutine(UpdateLabelAfterFrame());
+    }
+
+	private IEnumerator UpdateLabelAfterFrame()
+	{
+		yield return new WaitForEndOfFrame();
+		SetLabel($"<   {localizer.currentValue}   >");
+	}
+	
 	public override void OnPointerExit(PointerEventData eventData)
 	{
 		base.OnPointerExit(eventData);
-		SetLabel(localizer.currentValue);
 		onPointerExit?.Invoke();
 	}
+
+	public override void OnDeselect(BaseEventData eventData)
+    {
+		base.OnDeselect(eventData);
+		SetLabel(localizer.currentValue);
+    }
 }

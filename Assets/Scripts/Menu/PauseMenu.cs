@@ -27,13 +27,15 @@ public class PauseMenu : Menu
 
 	protected override void OnMenuOpened()
 	{
-		base.OnMenuOpened();
+		SetSelectedGameObject(buttonFirstSelected);
+		
 		GameController.SetPauseState(true);
 	}
 
 	protected override void OnMenuClosed()
 	{
-		base.OnMenuClosed();
+		SetSelectedGameObject(mainMenuButtonFirstSelected);
+		
 		GameController.SetPauseState(false);
 	}
 

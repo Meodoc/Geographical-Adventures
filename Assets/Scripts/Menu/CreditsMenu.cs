@@ -25,6 +25,16 @@ public class CreditsMenu : Menu
 	{
 		Refresh();
 	}
+	
+	protected override void OnMenuOpened()
+	{
+		SetSelectedGameObject(buttonFirstSelected);
+	}
+
+	protected override void OnMenuClosed()
+	{
+		SetSelectedGameObject(mainMenuButtonFirstSelected);
+	}
 
 	[NaughtyAttributes.Button()]
 	void Refresh()

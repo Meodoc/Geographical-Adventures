@@ -44,7 +44,14 @@ public class StatsMenu : Menu
 
 	protected override void OnMenuOpened()
 	{
+		SetSelectedGameObject(buttonFirstSelected);
+		
 		Refresh();
+	}
+
+	protected override void OnMenuClosed()
+	{
+		SetSelectedGameObject(pauseMenuFirstButtonSelected);
 	}
 
 	[NaughtyAttributes.Button()]
