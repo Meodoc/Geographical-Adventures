@@ -128,8 +128,6 @@ public class GlobeController : MonoBehaviour
 
 	}
 
-
-
 	void ClampAngleY()
 	{
 		angleY = Mathf.Clamp(angleY, -90 + poleAngleLimit, 90 - poleAngleLimit);
@@ -183,12 +181,25 @@ public class GlobeController : MonoBehaviour
 			}
 		}
 	}
-
-	Vector2 GetUIPos(Vector2 screenPos)
+	
+	Vector2 GetUIPos(Vector3 screenPos)
 	{
-		float x = (screenPos.x / Screen.width - 0.5f) * canvasScaler.referenceResolution.x;
-		float y = (screenPos.y / Screen.height - 0.5f) * canvasScaler.referenceResolution.y;
-		return new Vector2(x, y);
+		RectTransform canvasRect = (RectTransform) countryNameDisplay.canvas.transform;
+
+		// Convert screen position to local canvas position
+		Vector2 viewportPoint = new Vector2(screenPos.x / Screen.width, screenPos.y / Screen.height);
+		Vector2 canvasPoint = new Vector2(
+			(viewportPoint.x - 0.5f) * canvasRect.sizeDelta.x,
+			(viewportPoint.y - 0.5f) * canvasRect.sizeDelta.y
+		);
+
+		return canvasPoint;
+	}
+
+	Vector2 OffsetGamepadMapSelectorPos(Vector2 pos, float offset = 10.0f) 
+	{
+		pos.y += offset;
+		return pos;
 	}
 
 	Vector2 OffsetGamepadMapSelectorPos(Vector2 pos, float offset = 10.0f) 
