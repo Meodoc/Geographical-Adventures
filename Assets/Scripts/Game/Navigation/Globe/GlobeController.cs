@@ -202,12 +202,6 @@ public class GlobeController : MonoBehaviour
 		return pos;
 	}
 
-	Vector2 OffsetGamepadMapSelectorPos(Vector2 pos, float offset = 10.0f) 
-	{
-		pos.y += offset;
-		return pos;
-	}
-
 	GameObject Raycast(Ray ray, LayerMask mask)
 	{
 		Vector2 mousePos = Input.mousePosition;
